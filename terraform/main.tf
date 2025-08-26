@@ -8,13 +8,13 @@ terraform {
 }
 
 # Provision a Kind Cluster
-resource "null_resource" "kind_cluster" {
+resource "null_resource" "minikube_cluster" {
   provisioner "local-exec" {
-    command = "sudo sh -c '/home/bubu/bin/kind create cluster --name my-gitops-cluster'"
+    command = "sudo sh -c '/home/aneeka/bin/minikube create cluster --name my-gitops-cluster'"
   }
 
   provisioner "local-exec" {
     when    = destroy
-    command = "sudo sh -c '/home/bubu/bin/kind delete cluster --name my-gitops-cluster'"
+    command = "sudo sh -c '/home/aneeka/bin/minikube delete cluster --name my-gitops-cluster'"
   }
 }
