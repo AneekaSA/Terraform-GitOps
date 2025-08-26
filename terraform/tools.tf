@@ -4,7 +4,7 @@ provider "kubernetes" {
 }
 #... (your helm_release and kubernetes_manifest resources)
 resource "helm_release" "argocd" {
-  depends_on = [null_resource.kind_cluster]
+  depends_on = [null_resource.minikube_cluster]
   name       = "argocd"
   repository = "https://argoproj.github.io/argo-helm"
   chart      = "argo-cd"
@@ -14,7 +14,7 @@ resource "helm_release" "argocd" {
 
 # Prometheus and Grafana Helm Chart
 resource "helm_release" "prometheus" {
-  depends_on = [null_resource.kind_cluster]
+  depends_on = [null_resource.minikube_cluster]
   name       = "prometheus-stack"
   repository = "https://prometheus-community.github.io/helm-charts"
   chart      = "kube-prometheus-stack"
@@ -39,7 +39,7 @@ resource "kubernetes_manifest" "my_app_argocd" {
       }
       project = "default"
       source = {
-        repoURL        = "https://github.com/bhuvan-raj/Terraform-GitOps.git" # Replace with your repo
+        repoURL        = "https://github.com/AneekaSA/Terraform-GitOps.git" # Replace with your repo
         targetRevision = "main"
         path           = "manifests/my-app"
       }
